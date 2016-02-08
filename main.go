@@ -35,7 +35,7 @@ type (
 	Error struct {
 		Code         string `json:"code"`
 		ErrorMessage string `json:"error_message"`
-		Errortype    string `json:"error_type"`
+		ErrorType    string `json:"error_type"`
 	}
 )
 
@@ -96,7 +96,7 @@ func getAccessToken(cliID, cliSec, redirectURL, code string) (accessToken string
 	defer resp.Body.Close()
 	b, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return "", err
+		return
 	}
 	if resp.StatusCode == http.StatusOK {
 		var result Result
@@ -111,7 +111,7 @@ func getAccessToken(cliID, cliSec, redirectURL, code string) (accessToken string
 		if err != nil {
 			return "", err
 		}
-		return "", fmt.Errorf("Error occured(Type: %s): %s\n", e.Errortype, e.ErrorMessage)
+		return "", fmt.Errorf("Error occured(Type: %s): %s\n", e.ErrorType, e.ErrorMessage)
 	}
 	return "", fmt.Errorf("Undefined error occured.")
 
