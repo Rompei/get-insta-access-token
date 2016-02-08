@@ -46,7 +46,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	err = openCodeURL(cliID)
+	err = openCodeURL(cliID, redirectURL)
 	if err != nil {
 		panic(err)
 	}
@@ -73,8 +73,8 @@ func getInput(msg string) (string, error) {
 	return "", errors.New("Failed to get input.")
 }
 
-func openCodeURL(cliID string) (err error) {
-	url := fmt.Sprintf(CodeURL, cliID, "http://localhost:3000")
+func openCodeURL(cliID, redirectURL string) (err error) {
+	url := fmt.Sprintf(CodeURL, cliID, redirectURL)
 	cmd := exec.Command("open", url)
 	return cmd.Run()
 }
